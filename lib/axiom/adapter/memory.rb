@@ -74,7 +74,7 @@ module Axiom
       #
       # @api public
       def update(relation, tuple)
-        raise NotImplementedError, "#{self.class}##{__method}} not implemented"
+        raise NotImplementedError, "#{self.class}##{__method__} not implemented"
       end
 
       # Delete tuples from memory that intersect with the relation
@@ -88,7 +88,7 @@ module Axiom
       #
       # @api public
       def delete(relation)
-        raise NotImplementedError, "#{self.class}##{__method}} not implemented"
+        raise NotImplementedError, "#{self.class}##{__method__} not implemented"
       end
 
     end # class Memory
