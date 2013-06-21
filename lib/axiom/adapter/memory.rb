@@ -58,22 +58,22 @@ module Axiom
       # Update the tuples in memory that intersect the relation
       #
       # @example update all users to be active
-      #   header = Axiom::Header.coerce([ [ :active, TrueClass ] ])
-      #   tuple  = Axiom::Tuple.new(header, [ true ])
-      #   adapter.update(inactive_users, tuple)
+      #   function = lambda { |tuple| ... }
+      #   adapter.update(inactive_users, function)
       #
-      # The tuple header must be a subset of the base relation header. Every
-      # tuple in the relation should have the overlapping attributes changed
-      # to match the tuple. The tuple header must not be a superset of any
-      # keys and cause a uniqueness constraint violation.
+      # The function will be applied to every tuple in the relation and will
+      # return a new tuple to replace the original. The example above shows it
+      # being a Proc object, but a first-class Axiom object should be created
+      # that represents something that accepts a tuple and returns a tuple,
+      # rather than simply extracting a value from a tuple attribute.
       #
       # @param [Axiom::Relation] relation
-      # @param [Axiom::Tuple] tuple
+      # @param [#call] function
       #
       # @return [self]
       #
       # @api public
-      def update(relation, tuple)
+      def update(relation, function)
         raise NotImplementedError, "#{self.class}##{__method__} not implemented"
       end
 
