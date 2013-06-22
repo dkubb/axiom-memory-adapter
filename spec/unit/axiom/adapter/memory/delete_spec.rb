@@ -7,7 +7,7 @@ describe Adapter::Memory, '#delete' do
   subject { object.delete(relation) }
 
   let(:object)   { described_class.new(schema)               }
-  let(:schema)   { { 'users' => relation }                   }
+  let(:schema)   { { 'users' => relation }.freeze            }
   let(:relation) { Relation::Base.new('users', header, body) }
   let(:header)   { [ [ :id, Integer ] ]                      }
   let(:body)     { [ [ 1 ], [ 2 ], [ 3 ] ]                   }

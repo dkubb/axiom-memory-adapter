@@ -16,7 +16,7 @@ module Axiom
       # @return [undefined]
       #
       # @api private
-      def initialize(schema = {})
+      def initialize(schema)
         @schema = schema.dup
       end
 
