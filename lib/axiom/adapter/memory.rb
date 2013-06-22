@@ -79,7 +79,9 @@ module Axiom
       #
       # @api public
       def update(relation, function)
-        raise NotImplementedError, "#{self.class}##{__method__} not implemented"
+        base = @schema.fetch(relation.name)
+        @schema[relation.name] = base.replace(base.map(&function))
+        self
       end
 
       # Delete tuples from memory that intersect with the relation
