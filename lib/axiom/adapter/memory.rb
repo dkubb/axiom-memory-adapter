@@ -95,7 +95,8 @@ module Axiom
       #
       # @api public
       def delete(relation)
-        raise NotImplementedError, "#{self.class}##{__method__} not implemented"
+        @schema[relation.name] = @schema.fetch(relation.name).delete(relation)
+        self
       end
 
     end # class Memory
