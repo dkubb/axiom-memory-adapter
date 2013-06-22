@@ -7,7 +7,7 @@ module Axiom
 
     # A reference adapter for in-memory information
     class Memory
-      include Adamantium
+      include Adamantium::Flat
 
       # Initialize a Memory adapter
       #
@@ -17,7 +17,7 @@ module Axiom
       #
       # @api private
       def initialize(schema = {})
-        @schema = schema
+        @schema = schema.dup
       end
 
       # Insert a set of tuples into memory
@@ -35,7 +35,8 @@ module Axiom
       #
       # @api public
       def insert(relation, tuples)
-        raise NotImplementedError, "#{self.class}##{__method__} not implemented"
+        @schema[relation.name] = @schema.fetch(relation.name).insert(tuples)
+        self
       end
 
       # Read the results from memory
