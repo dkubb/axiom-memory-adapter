@@ -25,8 +25,8 @@ module Axiom
       #   tuple  = Axiom::Tuple.new(header, [ 'Dan Kubb' ])
       #   adapter.insert(users, [ tuple ])
       #
-      # @param [Axiom::Relation] relation
-      # @param [Enumerable<Axiom::Tuple>] tuples
+      # @param [Relation] relation
+      # @param [Enumerable<Tuple>] tuples
       #   a set of tuples to insert into the relation
       #
       # @return [self]
@@ -41,7 +41,7 @@ module Axiom
       # @example
       #   adapter.read(users) { |row| ... }
       #
-      # @param [Axiom::Relation] relation
+      # @param [Relation] relation
       #
       # @yield [row]
       #
@@ -67,7 +67,7 @@ module Axiom
       # that represents something that accepts a tuple and returns a tuple,
       # rather than simply extracting a value from a tuple attribute.
       #
-      # @param [Axiom::Relation] relation
+      # @param [Relation] relation
       # @param [#call] function
       #
       # @return [self]
@@ -82,7 +82,7 @@ module Axiom
       # @example
       #   adapter.delete(inactive_users)
       #
-      # @param [Axiom::Relation] relation
+      # @param [Relation] relation
       #
       # @return [self]
       #
