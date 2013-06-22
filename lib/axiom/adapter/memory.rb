@@ -11,11 +11,13 @@ module Axiom
 
       # Initialize a Memory adapter
       #
+      # @param [Hash{String => Relation::Materialized}] schema
+      #
       # @return [undefined]
       #
       # @api private
-      def initialize
-        # TODO: add a registry to map base relation names to tuples
+      def initialize(schema = {})
+        @schema = schema
       end
 
       # Insert a set of tuples into memory
@@ -39,20 +41,22 @@ module Axiom
       # Read the results from memory
       #
       # @example
-      #   adapter.read(users) { |row| ... }
+      #   adapter.read(users) { |tuple| ... }
       #
       # @param [Relation] relation
       #
-      # @yield [row]
+      # @yield [tuple]
       #
-      # @yieldparam [Array] row
-      #   each row in the results
+      # @yieldparam [Tuple] tuple
+      #   each tuple in the result set
       #
       # @return [self]
       #
       # @api public
-      def read(relation)
-        raise NotImplementedError, "#{self.class}##{__method__} not implemented"
+      def read(relation, &block)
+        return to_enum(__method__, relation) unless block_given?
+        @schema.fetch(relation.name).each(&block)
+        self
       end
 
       # Update the tuples in memory that intersect the relation
