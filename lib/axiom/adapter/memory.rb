@@ -35,7 +35,8 @@ module Axiom
       #
       # @api public
       def insert(relation, tuples)
-        @schema[relation.name] = @schema.fetch(relation.name).insert(tuples)
+        name = relation.name
+        @schema[name] = @schema.fetch(name).insert(tuples)
         self
       end
 
@@ -79,8 +80,9 @@ module Axiom
       #
       # @api public
       def update(relation, function)
-        base = @schema.fetch(relation.name)
-        @schema[relation.name] = base.replace(base.map(&function))
+        name = relation.name
+        base = @schema.fetch(name)
+        @schema[name] = base.replace(base.map(&function))
         self
       end
 
@@ -95,7 +97,8 @@ module Axiom
       #
       # @api public
       def delete(relation)
-        @schema[relation.name] = @schema.fetch(relation.name).delete(relation)
+        name = relation.name
+        @schema[name] = @schema.fetch(name).delete(relation)
         self
       end
 
