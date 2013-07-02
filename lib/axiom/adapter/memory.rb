@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require 'axiom'
+require 'thread_safe'
 
 module Axiom
   module Adapter
@@ -9,34 +10,64 @@ module Axiom
     class Memory
       include Adamantium::Flat
 
+      # The schema
+      #
+      # @return [Hash{String => Axiom::Adapter::Memory::Gateway}]
+      #
+      # @api private
+      attr_reader :schema
+      private :schema
+
       # Initialize a Memory adapter
       #
-      # @param [Hash{String => Relation::Materialized}] schema
+      # @param [Hash{String => Axiom::Adapter::Memory::Gateway}] schema
       #
       # @return [undefined]
       #
       # @api private
-      def initialize(schema)
-        @schema = schema.dup
+      def initialize(schema = {})
+        @schema = ThreadSafe::Hash[schema]
+      end
+
+      # Get gateway in the schema
+      #
+      # @param [#to_str] name
+      #
+      # @return [Axiom::Adapter::Memory::Gateway]
+      #
+      # @api private
+      def [](name)
+        schema.fetch(name)
+      end
+
+      # Set the gateway in the schema
+      #
+      # @param [#to_str] name
+      # @param [Axiom::Relation] relation
+      #
+      # @return [undefined]
+      #
+      # @api private
+      def []=(name, relation)
+        schema[name] = Gateway.new(self, name, relation)
       end
 
       # Insert a set of tuples into memory
       #
       # @example insert a new user
-      #   header = Axiom::Header.coerce([ [ :name, String ] ])
-      #   tuple  = Axiom::Tuple.new(header, [ 'Dan Kubb' ])
-      #   adapter.insert(users, [ tuple ])
+      #   header = Axiom::Header.coerce([[:name, String]])
+      #   tuple  = Axiom::Tuple.new(header, ['Dan Kubb'])
+      #   adapter.insert(users, [tuple])
       #
-      # @param [Relation] relation
+      # @param [Axiom::Adapter::Memory::Gateway] gateway
       # @param [Enumerable<Tuple>] tuples
       #   a set of tuples to insert into the relation
       #
       # @return [self]
       #
       # @api public
-      def insert(relation, tuples)
-        name = relation.name
-        @schema[name] = @schema.fetch(name).insert(tuples)
+      def insert(gateway, tuples)
+        self[gateway.name] = gateway.relation.insert(tuples)
         self
       end
 
@@ -45,7 +76,7 @@ module Axiom
       # @example
       #   adapter.read(users) { |tuple| ... }
       #
-      # @param [Relation] relation
+      # @param [Axiom::Adapter::Memory::Gateway] gateway
       #
       # @yield [tuple]
       #
@@ -55,9 +86,9 @@ module Axiom
       # @return [self]
       #
       # @api public
-      def read(relation, &block)
-        return to_enum(__method__, relation) unless block_given?
-        @schema.fetch(relation.name).each(&block)
+      def read(gateway, &block)
+        return to_enum(__method__, gateway) unless block_given?
+        self[gateway.name].each(&block)
         self
       end
 
@@ -72,16 +103,17 @@ module Axiom
       # that represents something that accepts a tuple and returns a tuple,
       # rather than simply extracting a value from a tuple attribute.
       #
-      # @param [Relation] relation
-      # @param [#call] function
+      # @param [Axiom::Adapter::Memory::Gateway] gateway
+      #
+      # @yield [tuple]
+      # @yieldparam [Axiom::Relation::Tuple] tuple
+      # @yieldreturn [Axiom::Relation::Tuple]
       #
       # @return [self]
       #
       # @api public
-      def update(relation, function)
-        name = relation.name
-        base = @schema.fetch(name)
-        @schema[name] = base.replace(base.map(&function))
+      def update(gateway, &block)
+        self[gateway.name] = gateway.relation.update(&block)
         self
       end
 
@@ -90,19 +122,42 @@ module Axiom
       # @example
       #   adapter.delete(inactive_users)
       #
-      # @param [Relation] relation
+      # @param [Axiom::Adapter::Memory::Gateway] gateway
+      # @param [Relation] other
       #
       # @return [self]
       #
       # @api public
-      def delete(relation)
-        name = relation.name
-        @schema[name] = @schema.fetch(name).delete(relation)
+      def delete(gateway, other)
+        self[gateway.name] = gateway.relation.delete(other)
         self
       end
 
     end # Memory
   end # Adapter
+
+  # XXX: patch axiom relations
+  class Relation
+
+    # XXX: patch #update into Materialized
+    class Materialized
+
+      # Return an updated materialized relation
+      #
+      # @example
+      #   updated = materialized.update { |tuple| ... }
+      #
+      # @return [Axiom::Relation::Materialized]
+      #
+      # @api public
+      def update(&block)
+        replace(map(&block))
+      end
+
+    end # Materialized
+  end # Relation
 end # Axiom
+
+require 'axiom/adapter/memory/gateway'
 
 require 'axiom/adapter/memory/version'
