@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 require 'spec_helper'
-require 'axiom/adapter/memory'
 
 describe Adapter::Memory, '#insert' do
   subject { object.insert(relation, tuples) }
