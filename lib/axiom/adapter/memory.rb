@@ -101,8 +101,8 @@ module Axiom
         self
       end
 
-    end # class Memory
-  end # module Adapter
-end # module Axiom
+    end # Memory
+  end # Adapter
+end # Axiom
 
 require 'axiom/adapter/memory/version'
