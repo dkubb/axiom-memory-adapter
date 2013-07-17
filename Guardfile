@@ -2,6 +2,7 @@
 
 guard :bundler do
   watch('Gemfile')
+  watch('Gemfile.lock')
   watch('axiom-memory-adapter.gemspec')
 end
 
@@ -21,4 +22,10 @@ guard :rspec, :keep_failed => false do
 
   # run a spec if it is modified
   watch(%r{\Aspec/(?:unit|integration)/.+_spec\.rb\z})
+end
+
+guard :rubocop, cli: %w[--config config/rubocop.yml] do
+  watch(%r{.+\.(?:rb|rake)\z})
+  watch(%r{\Aconfig/rubocop\.yml\z})  { |m| File.dirname(m[0]) }
+  watch(%r{(?:.+/)?\.rubocop\.yml\z}) { |m| File.dirname(m[0]) }
 end
