@@ -63,9 +63,8 @@ module Axiom
 
       # Update the tuples in memory that intersect the relation
       #
-      # @example update all users to be active
-      #   function = lambda { |tuple| ... }
-      #   adapter.update(inactive_users, function)
+      # @example update all inactive users
+      #   adapter.update(inactive_users) { |tuple| ... }
       #
       # The function will be applied to every tuple in the relation and will
       # return a new tuple to replace the original. The example above shows it
