@@ -30,5 +30,15 @@ describe Adapter::Memory, '#read' do
     subject { object.read(relation) }
 
     it { should be_instance_of(to_enum.class) }
+
+    it 'yields the expected tuples' do
+      expect { |block| subject.each(&block) }
+        .to yield_successive_args(*body)
+    end
+
+    it 'yields the expected types' do
+      expect { |block| subject.each(&block) }
+        .to yield_successive_args(Tuple, Tuple, Tuple)
+    end
   end
 end
