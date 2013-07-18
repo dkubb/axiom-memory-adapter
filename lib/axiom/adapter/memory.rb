@@ -10,6 +10,9 @@ module Axiom
     class Memory
       include Adamantium::Flat
 
+      # Raised when the relation name is unknown
+      UnknownRelationError = Class.new(IndexError)
+
       # The schema
       #
       # @return [Hash{String => Axiom::Adapter::Memory::Gateway}]
@@ -37,7 +40,9 @@ module Axiom
       #
       # @api private
       def [](name)
-        schema.fetch(name)
+        schema.fetch(name) do
+          raise UnknownRelationError, "the relation named #{name} is unknown"
+        end
       end
 
       # Set the gateway in the schema

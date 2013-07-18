@@ -17,6 +17,11 @@ describe Adapter::Memory, '#[]' do
   context 'with an unknown name' do
     let(:name) { 'unknown' }
 
-    specify { expect { subject }.to raise_error(KeyError) }
+    specify do
+      expect { subject }.to raise_error(
+        Adapter::Memory::UnknownRelationError,
+        'the relation named unknown is unknown'
+      )
+    end
   end
 end
