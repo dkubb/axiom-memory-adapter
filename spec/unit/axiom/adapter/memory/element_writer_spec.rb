@@ -13,7 +13,6 @@ describe Adapter::Memory, '#[]=' do
 
   it 'wraps the relation in a gateway' do
     subject
-    expect(object[name])
-      .to eql(described_class::Gateway.new(object, name, relation))
+    expect(object[name]).to eql(Relation::Variable.new(relation))
   end
 end
