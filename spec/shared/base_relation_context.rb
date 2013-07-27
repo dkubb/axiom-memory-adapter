@@ -4,5 +4,5 @@ shared_context 'relation' do
   let(:header)       { [id_attribute]              }
   let(:id_attribute) { Attribute::Integer.new(:id) }
   let(:schema)       { {}                          }
-  let(:name)         { 'users'.freeze              }
+  let(:name)         { :users                      }
 end
