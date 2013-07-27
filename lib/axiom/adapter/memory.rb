@@ -59,6 +59,27 @@ module Axiom
 
     end # Memory
   end # Adapter
+
+  # XXX: patch Axiom:Relation
+  class Relation
+
+    # XXX: patch #update into Variable
+    class Variable
+
+      # Update a relation variable
+      #
+      # @example
+      #   relvar.update { |tuple| ... }
+      #
+      # @return [Axiom::Relation::Variable]
+      #
+      # @api public
+      def update(&block)
+        replace(map(&block))
+      end
+
+    end # Variable
+  end # Relation
 end # Axiom
 
 require 'axiom/adapter/memory/version'
