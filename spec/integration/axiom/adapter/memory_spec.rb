@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Axiom::Adapter::Memory do
+describe Adapter::Memory do
   subject { described_class.new(schema) }
 
   include_context 'relation'
