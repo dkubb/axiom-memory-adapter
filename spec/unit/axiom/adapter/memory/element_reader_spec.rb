@@ -5,13 +5,13 @@ require 'spec_helper'
 describe Adapter::Memory, '#[]' do
   subject { object[name] }
 
-  let!(:object) { described_class.new(users: gateway) }
-  let(:gateway) { double('gateway')                   }
+  let!(:object)  { described_class.new(users: relation)        }
+  let(:relation) { double('relation', :materialized? => false) }
 
   context 'with a known name' do
     let(:name) { :users }
 
-    it { should be(gateway) }
+    it { should eql(Relation::Variable.new(relation)) }
   end
 
   context 'with an unknown name' do

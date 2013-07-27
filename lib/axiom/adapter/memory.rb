@@ -29,10 +29,11 @@ module Axiom
       #
       # @api private
       def initialize(schema = {})
-        @schema = ThreadSafe::Hash[schema]
+        @schema = ThreadSafe::Hash.new
+        schema.each { |name, relation| self[name] = relation }
       end
 
-      # Get gateway in the schema
+      # Get relation variable in the schema
       #
       # @param [#to_str] name
       #
@@ -45,7 +46,7 @@ module Axiom
         end
       end
 
-      # Set the gateway in the schema
+      # Set the relation variable in the schema
       #
       # @param [#to_str] name
       # @param [Axiom::Relation::Materialized] relation

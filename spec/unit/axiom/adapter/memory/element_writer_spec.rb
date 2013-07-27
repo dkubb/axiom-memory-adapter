@@ -11,7 +11,7 @@ describe Adapter::Memory, '#[]=' do
 
   it { should be(relation) }
 
-  it 'wraps the relation in a gateway' do
+  it 'wraps the relation in in a relation variable' do
     subject
     expect(object[name]).to eql(Relation::Variable.new(relation))
   end
