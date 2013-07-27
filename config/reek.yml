@@ -1,7 +1,8 @@
 ---
 Attribute:
-  enabled: false
-  exclude: []
+  enabled: true
+  exclude:
+  - Axiom::Adapter::Memory
 BooleanParameter:
   enabled: true
   exclude: []
@@ -62,7 +63,7 @@ TooManyStatements:
   enabled: true
   exclude:
   - each
-  max_statements: 5
+  max_statements: 2
 UncommunicativeMethodName:
   enabled: true
   exclude: []
@@ -96,11 +97,7 @@ UncommunicativeVariableName:
   accept: []
 UnusedParameters:
   enabled: true
-  exclude:
-  - Axiom::Adapter::Memory#delete
-  - Axiom::Adapter::Memory#insert
-  - Axiom::Adapter::Memory#read
-  - Axiom::Adapter::Memory#update
+  exclude: []
 UtilityFunction:
   enabled: true
   exclude: []
