@@ -4,12 +4,6 @@
 [![Code Climate](https://codeclimate.com/github/dkubb/axiom-memory-adapter.png)][codeclimate]
 [![Coverage Status](https://coveralls.io/repos/dkubb/axiom-memory-adapter/badge.png?branch=master)][coveralls]
 
-[gem]: https://rubygems.org/gems/axiom-memory-adapter
-[travis]: https://travis-ci.org/dkubb/axiom-memory-adapter
-[gemnasium]: https://gemnasium.com/dkubb/axiom-memory-adapter
-[codeclimate]: https://codeclimate.com/github/dkubb/axiom-memory-adapter
-[coveralls]: https://coveralls.io/r/dkubb/axiom-memory-adapter
-
 axiom-memory-adapter
 ====================
 
@@ -69,3 +63,9 @@ Copyright
 ---------
 
 Copyright &copy; 2013 Dan Kubb. See LICENSE for details.
+
+[gem]: https://rubygems.org/gems/axiom-memory-adapter
+[travis]: https://travis-ci.org/dkubb/axiom-memory-adapter
+[gemnasium]: https://gemnasium.com/dkubb/axiom-memory-adapter
+[codeclimate]: https://codeclimate.com/github/dkubb/axiom-memory-adapter
+[coveralls]: https://coveralls.io/r/dkubb/axiom-memory-adapter
