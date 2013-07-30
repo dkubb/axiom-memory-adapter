@@ -15,7 +15,7 @@ module Axiom
 
       # The schema
       #
-      # @return [Hash{String => Axiom::Relation::Variable}]
+      # @return [Hash{Symbol => Axiom::Relation::Variable}]
       #
       # @api private
       attr_reader :schema
@@ -23,11 +23,22 @@ module Axiom
 
       # Initialize a Memory adapter
       #
-      # @param [Hash{String => Axiom::Relation::Variable}] schema
+      # @example with a schema
+      #   adapter = Axiom::Adapter::Memory.new(
+      #     users: Axiom::Relation.new(
+      #       [[:id, Integer], [:name, String]],
+      #       [[1, 'Dan Kubb'], [2, 'John Doe']]
+      #     )
+      #   )
+      #
+      # @example without a schema
+      #   adapter = Axiom::Adapter::Memory.new
+      #
+      # @param [Hash{Symbol => Axiom::Relation::Variable}] schema
       #
       # @return [undefined]
       #
-      # @api private
+      # @api public
       def initialize(schema = {})
         @schema = ThreadSafe::Hash.new
         schema.each { |name, relation| self[name] = relation }
@@ -35,11 +46,14 @@ module Axiom
 
       # Get relation variable in the schema
       #
-      # @param [#to_str] name
+      # @example
+      #   adapter[:users]  # => users relation
+      #
+      # @param [Symbol] name
       #
       # @return [Axiom::Relation::Variable]
       #
-      # @api private
+      # @api public
       def [](name)
         schema.fetch(name) do
           raise UnknownRelationError, "the relation named #{name} is unknown"
@@ -48,7 +62,10 @@ module Axiom
 
       # Set the relation variable in the schema
       #
-      # @param [#to_str] name
+      # @example
+      #   adapter[:users] = users_relation
+      #
+      # @param [Symbol] name
       # @param [Axiom::Relation::Materialized] relation
       #
       # @return [undefined]
