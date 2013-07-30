@@ -23,8 +23,8 @@ require 'axiom-memory-adapter'
 
 adapter = Axiom::Adapter::Memory.new(
   customers: Axiom::Relation.new([[:id, Integer], [:name, String]]),
-    orders:    Axiom::Relation.new([[:id, Integer], [:customer_id, Integer]])
-    )
+  orders:    Axiom::Relation.new([[:id, Integer], [:customer_id, Integer]])
+)
 
 # Insert customer data
 customers = adapter[:customers]
@@ -41,7 +41,7 @@ orders.insert([[4, 2]])
 # Join customers and orders
 customer_orders = customers.
   rename(id: :customer_id).
-    join(orders.rename(id: :order_id))
+  join(orders.rename(id: :order_id))
 
 # Demonstrate writable view-like behaviour
 
