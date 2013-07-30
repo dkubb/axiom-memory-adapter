@@ -15,29 +15,6 @@ axiom-memory-adapter
 
 Use Axiom relations with an in-memory datastore
 
-Installation
-------------
-
-With Rubygems:
-
-```bash
-$ gem install axiom-memory-adapter
-$ irb -rubygems
->> require 'axiom-memory-adapter'
-=> true
-```
-
-With git and local working copy:
-
-```bash
-$ git clone git://github.com/dkubb/axiom-memory-adapter.git
-$ cd axiom-memory-adapter
-$ rake install
-$ irb -rubygems
->> require 'axiom-memory-adapter'
-=> true
-```
-
 Contributing
 -------------
 
