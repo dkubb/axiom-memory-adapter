@@ -70,7 +70,7 @@ module Axiom
       #
       # @return [undefined]
       #
-      # @api private
+      # @api public
       def []=(name, relation)
         schema[name] = Relation::Variable.new(relation)
       end
