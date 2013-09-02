@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 shared_context 'relation' do
   let(:relation)     { Relation.new(header, body)  }
   let(:body)         { [[1], [2], [3]]             }
