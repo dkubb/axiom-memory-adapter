@@ -13,6 +13,6 @@ describe Adapter::Memory, '#[]=' do
 
   it 'wraps the relation in in a relation variable' do
     subject
-    expect(object[name]).to eql(Relation::Variable.new(relation))
+    expect(object[name]).to eql(Relation::Variable::Materialized.new(relation))
   end
 end

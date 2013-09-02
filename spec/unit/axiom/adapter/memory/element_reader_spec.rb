@@ -11,7 +11,7 @@ describe Adapter::Memory, '#[]' do
   context 'with a known name' do
     let(:name) { :users }
 
-    it { should eql(Relation::Variable.new(relation)) }
+    it { should eql(Relation::Variable::Materialized.new(relation)) }
   end
 
   context 'with an unknown name' do

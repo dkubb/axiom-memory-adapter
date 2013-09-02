@@ -72,7 +72,7 @@ module Axiom
       #
       # @api public
       def []=(name, relation)
-        schema[name] = Relation::Variable.new(relation)
+        schema[name] = Relation::Variable::Materialized.new(relation)
       end
 
     end # Memory
