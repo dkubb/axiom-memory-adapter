@@ -15,7 +15,7 @@ module Axiom
 
       # The schema
       #
-      # @return [Hash{Symbol => Axiom::Relation::Variable}]
+      # @return [Hash{Symbol => Axiom::Relation}]
       #
       # @api private
       attr_reader :schema
@@ -34,7 +34,7 @@ module Axiom
       # @example without a schema
       #   adapter = Axiom::Adapter::Memory.new
       #
-      # @param [Hash{Symbol => Axiom::Relation::Variable}] schema
+      # @param [Hash{Symbol => Axiom::Relation}] schema
       #
       # @return [undefined]
       #
@@ -51,7 +51,7 @@ module Axiom
       #
       # @param [Symbol] name
       #
-      # @return [Axiom::Relation::Variable]
+      # @return [Axiom::Relation]
       #
       # @api public
       def [](name)
@@ -66,7 +66,7 @@ module Axiom
       #   adapter[:users] = users_relation
       #
       # @param [Symbol] name
-      # @param [Axiom::Relation::Materialized] relation
+      # @param [Axiom::Relation] relation
       #
       # @return [undefined]
       #
