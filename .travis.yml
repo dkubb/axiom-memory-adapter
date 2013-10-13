@@ -14,16 +14,10 @@ matrix:
     - rvm: jruby-head
       env: JRUBY_OPTS="$JRUBY_OPTS --debug"
   allow_failures:
-    # broken on travis
-    - rvm: ruby-head
+    - rvm: jruby-head  # travis broken
 notifications:
   irc:
     channels:
       - irc.freenode.org#rom-rb
-    on_success: never
-    on_failure: change
-  email:
-    recipients:
-      - dan.kubb@gmail.com
     on_success: never
     on_failure: change
