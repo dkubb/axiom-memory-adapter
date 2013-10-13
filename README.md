@@ -1,3 +1,7 @@
+# axiom-memory-adapter
+
+Use Axiom relations with an in-memory datastore
+
 [![Gem Version](https://badge.fury.io/rb/axiom-memory-adapter.png)][gem]
 [![Build Status](https://secure.travis-ci.org/dkubb/axiom-memory-adapter.png?branch=master)][travis]
 [![Dependency Status](https://gemnasium.com/dkubb/axiom-memory-adapter.png)][gemnasium]
@@ -10,13 +14,7 @@
 [codeclimate]: https://codeclimate.com/github/dkubb/axiom-memory-adapter
 [coveralls]: https://coveralls.io/r/dkubb/axiom-memory-adapter
 
-axiom-memory-adapter
-====================
-
-Use Axiom relations with an in-memory datastore
-
-Examples
---------
+## Examples
 
 ```ruby
 require 'axiom-memory-adapter'
@@ -60,12 +58,10 @@ customers.count  # => 2
 orders.count     # => 4
 ```
 
-Contributing
--------------
+## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
-Copyright
----------
+## Copyright
 
 Copyright &copy; 2013 Dan Kubb. See LICENSE for details.
