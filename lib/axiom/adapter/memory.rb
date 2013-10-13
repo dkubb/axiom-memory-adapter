@@ -56,7 +56,7 @@ module Axiom
       # @api public
       def [](name)
         schema.fetch(name) do
-          raise UnknownRelationError, "the relation named #{name} is unknown"
+          fail UnknownRelationError, "the relation named #{name} is unknown"
         end
       end
 
