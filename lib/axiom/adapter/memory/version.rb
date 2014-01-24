@@ -5,7 +5,7 @@ module Axiom
     class Memory
 
       # Gem version
-      VERSION = '0.0.3'.freeze
+      VERSION = '0.2.0'.freeze
 
     end # Memory
   end # Adapter
