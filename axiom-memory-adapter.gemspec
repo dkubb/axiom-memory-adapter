@@ -20,5 +20,5 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency('axiom',       '~> 0.1.1')
   gem.add_runtime_dependency('thread_safe', '~> 0.1.3')
 
-  gem.add_development_dependency('bundler', '~> 1.3', '>= 1.3.5')
+  gem.add_development_dependency('bundler', '~> 1.5', '>= 1.5.2')
 end
