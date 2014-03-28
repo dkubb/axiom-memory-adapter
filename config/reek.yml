@@ -62,7 +62,8 @@ TooManyMethods:
 TooManyStatements:
   enabled: true
   exclude:
-  - each
+    - each
+    - Axiom::Adapter::Memory#initialize
   max_statements: 2
 UncommunicativeMethodName:
   enabled: true
