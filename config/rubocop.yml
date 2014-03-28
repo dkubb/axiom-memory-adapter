@@ -57,3 +57,6 @@ TrivialAccessors:
 # Allow empty lines around body
 EmptyLinesAroundBody:
   Enabled: false
+
+FileName:
+  Enabled: false
